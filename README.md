@@ -1,2 +1,2 @@
-# Bibliotek-fagpr-ve-Jakob
+# Bibliotek-fagprøve-Jakob
 min fagprøve

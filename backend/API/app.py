@@ -7,10 +7,11 @@ from dotenv import load_dotenv
 import os
 load_dotenv()
 
-postgres_pw = os.getenv("postgres_pw")
+POSTGRES_PW = os.getenv("postgres_pw")
+DB_NAME = os.getenv("db_name")
 
 engine = create_engine(
-    f"postgresql+psycopg2://postgres:{postgres_pw}@localhost:5432/user_test_db"
+    f"postgresql+psycopg2://postgres:{POSTGRES_PW}@localhost:5432/{DB_NAME}"
 )
 
 Base = declarative_base()
@@ -34,22 +35,14 @@ class Users(Base):
     role:Mapped[str] = mapped_column(Enum(User_role, name="user_role_enum"), nullable=False)
 
 
-#tydligvis gjør fastapi middleware validation for meg så det er fint
-
-# class Sessions(Base):
-#     __tablename__ = "sessions"
-
-#     id = Column(Integer, primary_key=True)
-#     user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
-
 class Books(Base):
     __tablename__ = "books"
 
     id = Column(Integer, primary_key=True)
     name = Column(String, nullable=False)
-    isbn = Column(int, nullable=False)
-    in_stock = Column(int)
-    in_use = Column(int)
+    isbn = Column(Integer)
+    in_stock = Column(Integer)
+    in_use = Column(Integer)
 
 class PCs(Base):
     __tablename__ = "pcs"
@@ -63,7 +56,7 @@ class Apprentices(Base):
 
     id = Column(Integer, primary_key=True)
     name = Column(String, nullable=False)
-    email = Column(CITEXT, nullable=False)
+    email = Column(String, nullable=False) #husk å søk denne med "WHERE LOWER(email) IS LOWER({input})"
     apprenticeship_start = Column(Date)
     aprenticeship_end = Column(Date)
 
@@ -71,8 +64,8 @@ class Book_loans(Base):
     __tablename__ = "book_loans"
 
     id = Column(Integer, primary_key=True)
-    laoner_id:Mapped[int] = mapped_column(ForeignKey("apprentices.id"))
-    book_id: Mapped[int] = mapped_column(ForeignKey("books.id"))
+    loaner_id:Mapped[Integer] = mapped_column(ForeignKey("apprentices.id"))
+    book_id: Mapped[Integer] = mapped_column(ForeignKey("books.id"))
     loan_date = Column(Date, nullable=False)
     return_date = Column(Date)
 
