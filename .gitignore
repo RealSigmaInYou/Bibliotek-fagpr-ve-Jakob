@@ -1,7 +1,8 @@
 
 fagprøve.venv/
 
-
+node_modules
+__pycache__
 frontend/node_modules/
 
 
