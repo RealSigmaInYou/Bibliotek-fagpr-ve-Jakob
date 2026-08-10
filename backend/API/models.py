@@ -1,21 +1,14 @@
 import enum
-from sqlalchemy import Column, Integer, String, Date, ForeignKey, Enum
+from sqlalchemy import Column, Integer, String, Date, ForeignKey, Enum, BigInteger
 from sqlalchemy.orm import Mapped, mapped_column
+from db import Base, Session_local, engine
 
-try:
-    from .app import Base, engine
-except ImportError:
-    from app import Base, engine
 
-#Bruker enums selv om at for denne ene trengte 
-#jeg egentlig ikke å ha ett felt for hvilken
-#rolle man har, men kunne hat det som 
-#"is_admin = Column(bool)" istedenfor
 class User_role(enum.Enum): 
     ADMIN = "admin"
     SAKSBEHANDLER = "saksbehandler"
 
-#Base modeller til tabellene  (WIP(som hele resten av løsningen))
+
 class Users(Base):
     __tablename__ = "users"
 
@@ -30,7 +23,7 @@ class Books(Base):
 
     id = Column(Integer, primary_key=True)
     name = Column(String, nullable=False)
-    isbn = Column(Integer)
+    isbn = Column(BigInteger)
     in_stock = Column(Integer)
     in_use = Column(Integer)
 
@@ -39,8 +32,8 @@ class PCs(Base):
     __tablename__ = "pcs"
 
     id = Column(Integer, primary_key=True)
-    name = Column(String, nullable=False)
-    serial_number = Column(String, nullable=False)
+    device_name = Column("name", String, nullable=False)
+    serial_number = Column(String, nullable=False, unique=True)
 
 
 class Apprentices(Base):
@@ -50,15 +43,15 @@ class Apprentices(Base):
     name = Column(String, nullable=False)
     email = Column(String, nullable=False)
     apprenticeship_start = Column(Date)
-    aprenticeship_end = Column(Date)
+    apprenticeship_end = Column("aprenticeship_end", Date)
 
 
 class Book_loans(Base):
     __tablename__ = "book_loans"
 
     id = Column(Integer, primary_key=True)
-    loaner_id: Mapped[Integer] = mapped_column(ForeignKey("apprentices.id"))
-    book_id: Mapped[Integer] = mapped_column(ForeignKey("books.id"))
+    loaner_id: Mapped[int] = mapped_column("laoner_id", ForeignKey("apprentices.id"))
+    book_id: Mapped[int] = mapped_column(ForeignKey("books.id"))
     loan_date = Column(Date, nullable=False)
     return_date = Column(Date)
 
@@ -67,7 +60,7 @@ class PC_loans(Base):
     __tablename__ = "pc_loans"
 
     id = Column(Integer, primary_key=True)
-    laoner_id: Mapped[int] = mapped_column(ForeignKey("apprentices.id"))
+    loaner_id: Mapped[int] = mapped_column("laoner_id", ForeignKey("apprentices.id"))
     pc_id: Mapped[int] = mapped_column(ForeignKey("pcs.id"))
     loan_date = Column(Date, nullable=False)
     return_date = Column(Date)
