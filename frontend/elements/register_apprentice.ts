@@ -5,14 +5,43 @@ import { customElement } from "lit/decorators.js";
 export class registerApprenticeElement extends LitElement {
     static styles?: CSSResultGroup = css`
     form {
-        display: flex;
-        flex-direction: column;
-        gap: 0.5rem;
+        display: grid;
+        gap: 1rem;
         max-width: 300px;
     }
 
+    label {
+      font-weight: 600;
+    }
+
+    input,
+    select,
+    textarea,
     button {
-        width: fit-content;
+      width: 100%;
+      padding: 0.85rem;
+      border-radius: 12px;
+      border: 1px solid #cbd5e1;
+      font-size: 1rem;
+      box-sizing: border-box;
+      background: #ffffff;
+    }
+
+    button {
+      background: #475569;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 9999px;
+    }
+
+    button:hover {
+      background: #334155;
+    }
+
+    button:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
     }`;
 
     private async handleSubmit(event: Event) {
@@ -31,7 +60,7 @@ export class registerApprenticeElement extends LitElement {
 
             const token = localStorage.getItem("token");
             if (!token) {
-                throw new Error("No token found");
+                throw new Error("Du må logge inn for å få tilgang til denne funksjonen");
             }
 
             const response = await fetch("http://127.0.0.1:8000/api/register_apprentice", {
@@ -52,31 +81,32 @@ export class registerApprenticeElement extends LitElement {
             const data = await response.json();
 
             if (!response.ok) {
-                throw new Error(data.detail || "Apprentice registration failed");
+                throw new Error(data.detail || "Lærling registrering feilet");
             }
 
         } catch (error) {
             alert(error)
             console.error(error);
             }
+        alert("Lærling registrert")
         }
 
     protected render(): HTMLTemplateResult {
         return html`
             <form @submit=${this.handleSubmit}>
-                <label for="name">Apprentice name</label>
+                <label for="name">Lærlingens navn</label>
                 <input type="text" id="name" name="Name" required>
 
-                <label for="email">Apprentice email</label>
+                <label for="email">Lærlingens epost</label>
                 <input type="email" id="email" name="email" required>
 
-                <label for="apprenticeship_start">Apprenticeship start date</label>
+                <label for="apprenticeship_start">Læretid start</label>
                 <input type="date" id="apprenticeship_start" name="apprenticeship_start" required>
 
-                <label for="apprenticeship_end">Apprenticeship end date</label>
+                <label for="apprenticeship_end">Læretid slutt</label>
                 <input type="date" id="apprenticeship_end" name="apprenticeship_end" required>
 
-                <button type="submit">Register apprentice</button>
+                <button type="submit">Registrer lærling</button>
             </form>
         `;
     }

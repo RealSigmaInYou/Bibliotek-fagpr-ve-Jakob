@@ -2,17 +2,46 @@ import { css, html, LitElement, type CSSResultGroup, type HTMLTemplateResult } f
 import { customElement } from "lit/decorators.js";
 
 @customElement("app-create-user")
-export class LoginElement extends LitElement {
+export class CreateUserElement extends LitElement {
   static styles?: CSSResultGroup = css`
     form {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-      max-width: 300px;
+      display: grid;
+      gap: 1rem;
+      max-width: 360px;
+    }
+
+    label {
+      font-weight: 600;
+    }
+
+    input,
+    select,
+    textarea,
+    button {
+      width: 100%;
+      padding: 0.85rem;
+      border-radius: 12px;
+      border: 1px solid #cbd5e1;
+      font-size: 1rem;
+      box-sizing: border-box;
+      background: #ffffff;
     }
 
     button {
-      width: fit-content;
+      background: #475569;
+      color: #ffffff;
+      border: none;
+      cursor: pointer;
+      border-radius: 9999px;
+    }
+
+    button:hover {
+      background: #334155;
+    }
+
+    button:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
     }
   `;
   
@@ -33,12 +62,12 @@ export class LoginElement extends LitElement {
     
     
     */
-    if (password == repeat_password) {
+    if (password === repeat_password) {
       try {
         const role = (form.querySelector("#role") as HTMLSelectElement).value;
         const token = localStorage.getItem("token");
         if (!token) {
-            throw new Error("No token found");
+            throw new Error("Du må være logget inn.");
         }
 
         const response = await fetch("http://127.0.0.1:8000/api/create_user", {
@@ -53,39 +82,39 @@ export class LoginElement extends LitElement {
         const data = await response.json();
 
         if (!response.ok) {
-            throw new Error(data.detail || "User creation failed");
+            throw new Error(data.detail || "Opprettelse av bruker feilet");
         }
 
-        console.log("User creation successful");
+        alert("Bruker opprettet");
+        form.reset();
       } catch (error) {
+        alert(error instanceof Error ? error.message : String(error));
         console.error(error);
       }
+    } else {
+      alert("Passordene er ikke like");
     }
-    else  {
-      alert("Passwords do not match")
-      console.log("Passwords do not match")
-
-  }}
+  }
 
   protected render(): HTMLTemplateResult {
     return html`
       <form @submit=${this.handleSubmit}>
-        <label for="username">Username</label>
-        <input type="text" id="username" name="username" required>
+        <label for="username">Brukernavn</label>
+        <input type="text" id="username" name="username" required />
 
-        <label for="password">Password</label>
-        <input type="password" id="password" name="password" required>
+        <label for="password">Passord</label>
+        <input type="password" id="password" name="password" required />
 
-        <label for="repeat-password">Repeat password</label>
-        <input type="password" id="repeat_password" name="repeat_password" required>
+        <label for="repeat_password">Gjenta passord</label>
+        <input type="password" id="repeat_password" name="repeat_password" required />
 
-        <label for="role">Role</label>
+        <label for="role">Rolle</label>
         <select id="role" name="role">
           <option value="saksbehandler">Saksbehandler</option>
           <option value="admin">Admin</option>
         </select>
 
-        <button type="submit">Create user</button>
+        <button type="submit">Opprett bruker</button>
       </form>
     `;
   }

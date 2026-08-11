@@ -1,0 +1,11 @@
+import "./elements/login.ts";
+import "./elements/books_showcase.ts";
+import "./elements/register_books.ts";
+import "./elements/pcs_showcase.ts";
+import "./elements/register_item.ts";
+import "./elements/loan_book.ts";
+import "./elements/loan_pc.ts";
+import "./elements/return_item.ts";
+import "./elements/register_apprentice.ts";
+import "./elements/create_user.ts";
+import "./elements/navbar.ts"

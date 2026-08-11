@@ -5,14 +5,43 @@ import { customElement } from "lit/decorators.js";
 export class registerBooksElement extends LitElement {
     static styles?: CSSResultGroup = css`
     form {
-        display: flex;
-        flex-direction: column;
-        gap: 0.5rem;
-        max-width: 300px;
+        display: grid;
+        gap: 1rem;
+        max-width: 360px;
+    }
+
+    label {
+        font-weight: 600;
+    }
+
+    input,
+    select,
+    textarea,
+    button {
+        width: 100%;
+        padding: 0.85rem;
+        border-radius: 12px;
+        border: 1px solid #cbd5e1;
+        font-size: 1rem;
+        box-sizing: border-box;
+        background: #ffffff;
     }
 
     button {
-        width: fit-content;
+        background: #475569;
+        color: white;
+        border: none;
+        cursor: pointer;
+        border-radius: 9999px;
+    }
+
+    button:hover {
+        background: #334155;
+    }
+
+    button:disabled {
+        opacity: 0.65;
+        cursor: not-allowed;
     }`;
 
     private async handleSubmit(event: Event) {
@@ -28,7 +57,7 @@ export class registerBooksElement extends LitElement {
 
             const token = localStorage.getItem("token");
             if (!token) {
-                throw new Error("No token found");
+                throw new Error("Du må logge inn for å få tilgang til denne funksjonen");
             }
 
             const response = await fetch("http://127.0.0.1:8000/api/register_book", {
@@ -46,31 +75,33 @@ export class registerBooksElement extends LitElement {
             });
 
             const data = await response.json();
+            
 
             if (!response.ok) {
-                throw new Error(data.detail || "Book registration failed");
+                throw new Error(data.detail || "Bok registrering feilet");
             }
 
         } catch (error) {
             alert(error)
             console.error(error);
             }
+        window.location.reload();
         }
 
     protected render(): HTMLTemplateResult {
         return html`
             <form @submit=${this.handleSubmit}>
-                <label for="isbn">Serial number</label>
-                <input type="number" min="0" max="9799999999999" id="isbn" name="isbn" required> 
+                <label for="isbn">ISBN</label>
+                <input type="number" min="0" max="9799999999999" id="isbn" name="isbn" required>
                 <!-- ISBN starter alltid 978 eller 979, men jeg tar meg ikke tid å sørge for at inputen følger ISBN formatet-->
 
-                <label for="book_name">Book name</label>
+                <label for="book_name">Navn på bok</label>
                 <input type="text" id="book_name" name="book_name" required>
 
-                <label for="book_amount">Number of copies</label>
-                <input type="number" id="book_amount" name="book_amount" required>
+                <label for="book_amount">Antall kopier</label>
+                <input type="number" min="1" id="book_amount" name="book_amount" required>
 
-                <button type="submit">Register device</button>
+                <button type="submit">Registrer bok</button>
             </form>
         `;
     }

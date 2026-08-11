@@ -4,6 +4,7 @@ fagprøve.venv/
 node_modules
 __pycache__
 frontend/node_modules/
+backend\generate_password_hash.py
 
 
 .env

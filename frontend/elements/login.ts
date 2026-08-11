@@ -5,14 +5,43 @@ import { customElement } from "lit/decorators.js";
 export class LoginElement extends LitElement {
   static styles?: CSSResultGroup = css`
     form {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-      max-width: 300px;
+      display: grid;
+      gap: 1rem;
+      max-width: 340px;
+    }
+
+    label {
+      font-weight: 600;
+    }
+
+    input,
+    select,
+    textarea,
+    button {
+      width: 100%;
+      padding: 0.85rem;
+      border-radius: 12px;
+      border: 1px solid #cbd5e1;
+      font-size: 1rem;
+      box-sizing: border-box;
+      background: #ffffff;
     }
 
     button {
-      width: fit-content;
+      background: #475569;
+      color: #ffffff;
+      border: none;
+      cursor: pointer;
+      border-radius: 9999px;
+    }
+
+    button:hover {
+      background: #334155;
+    }
+
+    button:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
     }
   `;
 
@@ -35,14 +64,13 @@ export class LoginElement extends LitElement {
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.detail || "Login failed");
+        throw new Error(data.detail || "Innlogging feilet");
       }
 
       localStorage.setItem("token", data.token);
-      console.log("Login successful");
-
+      alert("Innlogging vellykket");
     } catch (error) {
-      alert("Username or password is incorrect")
+      alert("Brukernavn eller passord er feil");
       console.error(error);
     }
   }
@@ -50,13 +78,13 @@ export class LoginElement extends LitElement {
   protected render(): HTMLTemplateResult {
     return html`
       <form @submit=${this.handleSubmit}>
-        <label for="username">Username</label>
-        <input type="text" id="username" name="username" required>
+        <label for="username">Brukernavn</label>
+        <input type="text" id="username" name="username" required />
 
-        <label for="password">Password</label>
-        <input type="password" id="password" name="password" required>
+        <label for="password">Passord</label>
+        <input type="password" id="password" name="password" required />
 
-        <button type="submit">Login</button>
+        <button type="submit">Logg inn</button>
       </form>
     `;
   }

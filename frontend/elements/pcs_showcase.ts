@@ -9,12 +9,35 @@ export class AllPcsElement extends LitElement {
     @state()
     private statusMessage = "";
 
-    @state()
-    private isError = false;
-
     static styles?: CSSResultGroup = css`
+    button,
+    input,
+    select,
+    textarea {
+        width: 100%;
+        padding: 0.85rem;
+        border-radius: 12px;
+        border: 1px solid #cbd5e1;
+        font-size: 1rem;
+        box-sizing: border-box;
+        background: #ffffff;
+    }
+
     button {
-        width: fit-content;
+        background: #475569;
+        color: #ffffff;
+        border: none;
+        cursor: pointer;
+        border-radius: 9999px;
+    }
+
+    button:hover {
+        background: #334155;
+    }
+
+    button:disabled {
+        opacity: 0.65;
+        cursor: not-allowed;
     }
 
     .status {
@@ -33,7 +56,7 @@ export class AllPcsElement extends LitElement {
     private async loadPcs() {
         try {
             const token = localStorage.getItem("token");
-            if (!token) throw new Error("No token found");
+            if (!token) throw new Error("Du må logge inn for å få tilgang til denne funksjonen");
 
             const response = await fetch("http://127.0.0.1:8000/api/pcs", {
                 method: "GET",
@@ -48,25 +71,35 @@ export class AllPcsElement extends LitElement {
 
             this.pcs = data.pcs || [];
             this.statusMessage = "";
-            this.isError = false;
         } catch (error) {
             const message = error instanceof Error ? error.message : String(error);
             this.statusMessage = message;
-            this.isError = true;
         }
     }
 
-    protected render(): HTMLTemplateResult {
+    private handleRefresh() {
+        void this.loadPcs();
+    }
+
+    private renderStatus(): HTMLTemplateResult {
+        return html`<div class="status">${this.statusMessage}</div>`;
+    }
+
+    private renderPcList(): HTMLTemplateResult {
         return html`
-            <button @click=${this.loadPcs}>Refresh PCs</button>
-            ${this.statusMessage
-                ? html`<div class="status">${this.statusMessage}</div>`
-                : ""}
             <ul>
                 ${this.pcs.map(
                     (pc) => html`<li>${pc.device_name} (SN ${pc.serial_number})</li>`
                 )}
             </ul>
+        `;
+    }
+
+    protected render(): HTMLTemplateResult {
+        return html`
+            <button @click=${this.handleRefresh}>Refresh PCs</button>
+            ${this.statusMessage ? this.renderStatus() : ""}
+            ${this.renderPcList()}
         `;
     }
 }
@@ -79,19 +112,45 @@ export class SearchPcsElement extends LitElement {
     @state()
     private statusMessage = "";
 
-    @state()
-    private isError = false;
-
     static styles?: CSSResultGroup = css`
     form {
-        display: flex;
-        flex-direction: column;
-        gap: 0.5rem;
+        display: grid;
+        gap: 1rem;
         max-width: 300px;
     }
 
+    label {
+      font-weight: 600;
+    }
+
+    input,
+    select,
+    textarea,
     button {
-        width: fit-content;
+      width: 100%;
+      padding: 0.85rem;
+      border-radius: 12px;
+      border: 1px solid #cbd5e1;
+      font-size: 1rem;
+      box-sizing: border-box;
+      background: #ffffff;
+    }
+
+    button {
+      background: #475569;
+      color: #ffffff;
+      border: none;
+      cursor: pointer;
+      border-radius: 9999px;
+    }
+
+    button:hover {
+      background: #334155;
+    }
+
+    button:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
     }
 
     .status {
@@ -115,7 +174,7 @@ export class SearchPcsElement extends LitElement {
             if (deviceName) params.set("device_name", deviceName);
 
             const token = localStorage.getItem("token");
-            if (!token) throw new Error("No token found");
+            if (!token) throw new Error("Du må logge inn for å få tilgang til denne funksjonen");
 
             const response = await fetch(`http://127.0.0.1:8000/api/pcs/search?${params.toString()}`, {
                 method: "GET",
@@ -130,11 +189,9 @@ export class SearchPcsElement extends LitElement {
 
             this.pcs = data.pcs || [];
             this.statusMessage = "";
-            this.isError = false;
         } catch (error) {
             const message = error instanceof Error ? error.message : String(error);
             this.statusMessage = message;
-            this.isError = true;
         }
     }
 

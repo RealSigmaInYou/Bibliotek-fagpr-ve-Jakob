@@ -23,7 +23,7 @@ class Books(Base):
 
     id = Column(Integer, primary_key=True)
     name = Column(String, nullable=False)
-    isbn = Column(BigInteger)
+    isbn = Column(BigInteger, unique=True)
     in_stock = Column(Integer)
     in_use = Column(Integer)
 
@@ -41,9 +41,9 @@ class Apprentices(Base):
 
     id = Column(Integer, primary_key=True)
     name = Column(String, nullable=False)
-    email = Column(String, nullable=False)
+    email = Column(String, nullable=False, unique=True)
     apprenticeship_start = Column(Date)
-    apprenticeship_end = Column("aprenticeship_end", Date)
+    apprenticeship_end = Column(Date)
 
 
 class Book_loans(Base):
@@ -51,6 +51,7 @@ class Book_loans(Base):
 
     id = Column(Integer, primary_key=True)
     loaner_id: Mapped[int] = mapped_column("laoner_id", ForeignKey("apprentices.id"))
+    case_responsible_id: Mapped[int] = mapped_column(ForeignKey("users.id"))
     book_id: Mapped[int] = mapped_column(ForeignKey("books.id"))
     loan_date = Column(Date, nullable=False)
     return_date = Column(Date)
@@ -61,6 +62,7 @@ class PC_loans(Base):
 
     id = Column(Integer, primary_key=True)
     loaner_id: Mapped[int] = mapped_column("laoner_id", ForeignKey("apprentices.id"))
+    case_responsible_id: Mapped[int] = mapped_column(ForeignKey("users.id"))
     pc_id: Mapped[int] = mapped_column(ForeignKey("pcs.id"))
     loan_date = Column(Date, nullable=False)
     return_date = Column(Date)
