@@ -157,6 +157,7 @@ export class LoanPcElement extends LitElement {
             this.statusMessage = message;
         }
         alert(this.statusMessage)
+        window.location.reload();
     }
 
     private handleSerialChange(event: Event) {

@@ -479,14 +479,14 @@ def loan_pc(payload: loan_pc_payload, request: Request, db: Session = Depends(ge
 
     if not pc:
         raise HTTPException(status_code=404, detail="PC not found")
+    
 
     existing_loan = db.query(pc_loan_model).filter(
         pc_loan_model.pc_id == pc.id,
-        pc_loan_model.loaner_id == payload.apprentice_ID,
-        pc_loan_model.return_date == None,
-    ).first()
+        pc_loan_model.return_date.is_(None)
+        ).first()
     if existing_loan:
-        raise HTTPException(status_code=409, detail="Loan already active for this apprentice and PC")
+        raise HTTPException(status_code=409, detail="Loan already active for PC")
 
     new_loan = pc_loan_model(
         loaner_id=payload.apprentice_ID,

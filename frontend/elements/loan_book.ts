@@ -160,6 +160,7 @@ export class LoanBookElement extends LitElement {
         this.statusMessage = message;
         this.isError = true;
       }
+      window.location.reload();
     }
 
     private handleIsbnChange(event: Event) {
