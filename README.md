@@ -103,9 +103,9 @@ Og så
 **npm run dev**
 For å kjøre frontenden.
 
-For at løsning skal funke må du også lage en fil i prosjektmappen som heter .env som inneholder:
-postgres_pw = <postgresql passord
-db_name = <navnet på databasen din>
-dev-secret = <din kjempe hemmelige secret>
-JWT_SECRET = <din hemmelige secret>
+For at løsning skal funke må du også lage en fil i prosjektmappen som heter .env som inneholder:  \
+postgres_pw = <postgresql passord  \
+db_name = <navnet på databasen din>  \ 
+dev-secret = <din kjempe hemmelige secret>  \
+JWT_SECRET = <din hemmelige secret>  \
 
