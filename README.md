@@ -1,31 +1,31 @@
-#Formål
+# Formål
 Systemet er utvikler for å gjøre det lettere for ansatte i Yrkesfaglig opplæring å holde styr på lån av pc-er og pensumbøker. Løsningen gjør det mulig å registrere pc-er og bøker, registrere lærlinger, låne pc-er og bøker til lærlinger, og registrere retur av pc-er og bøker fra lærlinger. 
 
-#Omfang og arkitektur
+# Omfang og arkitektur
 Systemet består av:
 -	En frontend
 -	En backend API
 -	En database
 -	JWT basert autentisering og autorisering
 
-##Frontend
+## Frontend
 Frontenden er ansvarlig for:
 -	Innlogging
 -	Registrering av bøker, PC-er og lærlinger
 -	Tilbakelevering av PC-er og bøker
 -	Fremvise aktive lån
 -	Lage brukere
-##Backend
+## Backend
 Backenden er ansvarlig for:
 -	Validering av data
 -	Autentisering
 -	DB-operasjoner
 -	Forretingslogikk
-##Database
+## Database
 -	Lagring av brukere, bøker, PC-er, lån, og lærlinger
 
 
-#Teknologier
+# Teknologier
 Løsningen er skrevet i HTML, TypeScript og Python, og bruker en PostgreSQL database.
 | Teknologi       | Bruksområde                |
 |-----------------|----------------------------|
@@ -39,10 +39,10 @@ Løsningen er skrevet i HTML, TypeScript og Python, og bruker en PostgreSQL data
 | JSON Web Tokens | Autentisering              |
 | PostgreSQL      | Database                   |
 
-#Autentisering og autorisering
+# Autentisering og autorisering
 Løsningen benytter seg av JWT (JSON Web Tokens) for autentisering
 
-##Autentisering
+## Autentisering
 Innlogging skjer ved at:
 1.	Bruker sender brukernavn og passord
 2.	Backend verifiserer at passord matcher lagret passord
@@ -50,23 +50,23 @@ Innlogging skjer ved at:
 4.	Token blir gitt til bruker
 5.	Token blir lagret i LocalStorage i brukeren sin nettleser
 
-##Autorisering
+## Autorisering
 Alle endepunkter bortsett fra:
 -	/api/login
 -	/api/health
 krever en gyldig JWT-token.
 
-###Roller:
+### Roller:
 Det er to roller i løsningen:
-####Saksbehandler:
+#### Saksbehandler:
 Saksbehandlere har tilgang til å 
 -	Registrere lærlinger, bøker, pc-er, bok-lån og pc-lån
 -	Søke etter lærlinger, bøker, pc-er, bok-lån og pc-lån
 -	Registrere tilbakeleveringer på bøker og pc-er
-####Admin:
+#### Admin:
 Admin brukere har tilgang til alt saksbehandlere har tilgang til, men de kan også opprette brukere.
 
-#Feilhåndtering:
+# Feilhåndtering:
 | Situasjon                                                        | http-kode |
 |------------------------------------------------------------------|-----------|
 | Feil brukernavn eller passord                                    | 401       |
@@ -76,9 +76,9 @@ Admin brukere har tilgang til alt saksbehandlere har tilgang til, men de kan ogs
 | Registrerer bok/pc/lærling/lån som matcher noe annet i databasen | 409       |
 | Prøver å returnere ett lån som allerede er returnert             | 409       |
 
-Drift
+# Drift
 For å kjøre løsningen lokalt:
-Backend
+## Backend
 For førstegangsoppsett er det anbefalt å sette opp ett virtuelt miljø for å isolere Python-avhengighetene.
 Kjør: 
 **python -m venv .venv**
@@ -95,7 +95,7 @@ Gå inn i /backend fra prosjektmappen og så kjør:
 Og til slutt for å kjøre programmet:
 **python -m uvicorn main:app --reload**
 
-Frontend
+## Frontend
 For frontend kjører du:
 **npm ci**
 For å laste ned dependencies
