@@ -78,7 +78,7 @@ export class ReturnItemElement extends LitElement {
             if (!token) throw new Error("Du må logge inn for å få tilgang til denne funksjonen");
 
             const endpoint = this.itemType === "book" ? "active_book_loans" : "active_pc_loans";
-            const response = await fetch(`http://127.0.0.1:8000/api/${endpoint}`, {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/${endpoint}`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -124,7 +124,7 @@ export class ReturnItemElement extends LitElement {
             const token = localStorage.getItem("token");
             if (!token) throw new Error("Du må logge inn for å få tilgang til denne funksjonen");
 
-            const response = await fetch(`http://127.0.0.1:8000/api/${endpoint}`, {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/${endpoint}`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

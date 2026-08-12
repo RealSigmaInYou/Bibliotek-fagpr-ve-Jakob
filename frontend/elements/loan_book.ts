@@ -110,10 +110,10 @@ export class LoanBookElement extends LitElement {
         if (!token) throw new Error("Du må være logget inn.");
 
         const [booksResponse, apprenticesResponse] = await Promise.all([
-          fetch("http://127.0.0.1:8000/api/books", {
+          fetch(`${import.meta.env.VITE_API_URL}/api/books`, {
             headers: { Authorization: `Bearer ${token}` },
           }),
-          fetch("http://127.0.0.1:8000/api/apprentices", {
+          fetch(`${import.meta.env.VITE_API_URL}/api/apprentices`, {
             headers: { Authorization: `Bearer ${token}` },
           }),
         ]);
@@ -141,7 +141,7 @@ export class LoanBookElement extends LitElement {
         const token = localStorage.getItem("token");
         if (!token) throw new Error("Du må være logget inn.");
 
-        const response = await fetch("http://127.0.0.1:8000/api/loan_book", {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/loan_book`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
