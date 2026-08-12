@@ -81,7 +81,7 @@ export class registerDeviceElement extends LitElement {
             alert(error)
             console.error(error);
             }
-        alert("Bok registrert")
+        alert("Enhet registrert")
         window.location.reload();
         }
 
