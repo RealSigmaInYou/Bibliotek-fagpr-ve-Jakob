@@ -418,7 +418,7 @@ def loan_book(payload: loan_books_payload, request: Request, db: Session = Depen
 
     return {
         "status": 200,
-        "message": "Book loaned",
+        "message": "Bok lånet",
         "loan": {
             "loan_id": new_loan.id,
             "book_id": book.id,
@@ -501,7 +501,7 @@ def loan_pc(payload: loan_pc_payload, request: Request, db: Session = Depends(ge
 
     return {
         "status": 200,
-        "message": "PC loaned",
+        "message": "Enhet lånet",
         "loan": {
             "loan_id": new_loan.id,
             "pc_id": pc.id,

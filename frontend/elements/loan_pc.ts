@@ -149,9 +149,9 @@ export class LoanPcElement extends LitElement {
             });
 
             const data = await response.json();
-            if (!response.ok) throw new Error(data.detail || "Utlån av PC feilet.");
+            if (!response.ok) throw new Error(data.detail || "Utlån av enhet feilet.");
 
-            this.statusMessage = data.message || "PC er lånt ut.";
+            this.statusMessage = data.message || "Enhet er lånt ut.";
         } catch (error) {
             const message = error instanceof Error ? error.message : String(error);
             this.statusMessage = message;
@@ -173,7 +173,7 @@ export class LoanPcElement extends LitElement {
             ? html`${this.pcs.map(
                 (pc) => html`<option value=${pc.serial_number}>${pc.device_name} — SN ${pc.serial_number}</option>`
             )}`
-            : html`<option>Ingen PC-er tilgjengelig</option>`;
+            : html`<option>Ingen enheter tilgjengelig</option>`;
     }
 
     private renderApprenticeOptions(): HTMLTemplateResult {
@@ -187,7 +187,7 @@ export class LoanPcElement extends LitElement {
     protected render(): HTMLTemplateResult {
         return html`
             <form @submit=${this.handleSubmit}>
-                <label for="serial_number">Velg PC</label>
+                <label for="serial_number">Velg enhet</label>
                 <select id="serial_number" @change=${this.handleSerialChange}>
                     ${this.renderPcOptions()}
                 </select>
@@ -197,7 +197,7 @@ export class LoanPcElement extends LitElement {
                     ${this.renderApprenticeOptions()}
                 </select>
 
-                <button type="submit">Lån ut PC</button>
+                <button type="submit">Lån ut enhet</button>
             </form>
         `;
     }

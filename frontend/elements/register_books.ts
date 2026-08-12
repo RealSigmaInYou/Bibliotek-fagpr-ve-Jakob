@@ -85,6 +85,7 @@ export class registerBooksElement extends LitElement {
             alert(error)
             console.error(error);
             }
+        alert("Bok registrert")
         window.location.reload();
         }
 

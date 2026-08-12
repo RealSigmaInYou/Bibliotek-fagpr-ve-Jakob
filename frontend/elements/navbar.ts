@@ -49,8 +49,8 @@ export class NavBarElement extends LitElement {
             <a href="./books.html">Bøker</a>
             <a href="./devices.html">Enheter</a>
             <a href="./loan_book.html">Lån ut bok</a>
-            <a href="./loan_device.html">Lån ut PC</a>
-            <a href="./apprentices.html">Lærlinger</a>
+            <a href="./loan_device.html">Lån ut enhet</a>
+            <a href="./apprentices.html">Registrer lærlinger</a>
             <a href="./create_user.html">Lag bruker</a>
         </nav>
         `   
