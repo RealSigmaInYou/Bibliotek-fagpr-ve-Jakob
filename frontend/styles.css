@@ -67,6 +67,7 @@ h1 {
 .warning {
     color: white;
     background: rgb(196, 0, 0);
+    border-color: #000000;
     border-radius: 1rem;
-    padding: 2rem;
+    padding: 1rem;
 }
