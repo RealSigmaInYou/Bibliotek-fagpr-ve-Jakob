@@ -104,11 +104,13 @@ Og så
 For å kjøre frontenden.
 
 ## .env
-For at løsning skal funke må du også lage en fil i prosjektmappen som heter .env som inneholder:  \
-postgres_pw = DITT_POSTGRESQL_PASSORD  \
-db_name = DIN_DATABASE_SITT_NAVN  \
-dev-secret = DIN_KJEMPE_HEMMELIGE_SECRET  \
+For at løsning skal funke må du også lage en fil i prosjektmappen som heter .env som inneholder:  
+```
+postgres_pw = DITT_POSTGRESQL_PASSORD  
+db_name = DIN_DATABASE_SITT_NAVN  
+dev-secret = DIN_KJEMPE_HEMMELIGE_SECRET  
 JWT_SECRET = DIN_JWT_SECRET  
+```
 
 # Videreutvikling av løsningen  
 Løsningen mangler:  
