@@ -15,7 +15,7 @@ export default defineConfig({
         loan_book: resolve(__dirname, 'pages/loan_book.html'),
         loan_device: resolve(__dirname, 'pages/loan_device.html'),
         apprentices: resolve(__dirname, 'pages/apprentices.html'),
-        create_user: resolve(__dirname, 'pages/admin/create_user.html'),
+        create_user: resolve(__dirname, 'pages/create_user.html'),
       },
     },
   },

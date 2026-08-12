@@ -8,9 +8,11 @@ load_dotenv()
 
 POSTGRES_PW = os.getenv("postgres_pw")
 DB_NAME = os.getenv("db_name")
+POSTGRES_HOST = os.getenv("postgres_host")
+POSTGRES_PORT = os.getenv("postgres_port")
 
 engine = create_engine(
-    f"postgresql+psycopg2://postgres:{POSTGRES_PW}@localhost:5432/{DB_NAME}"
+    f"postgresql+psycopg2://postgres:{POSTGRES_PW}@{POSTGRES_HOST}:{POSTGRES_PORT}/{DB_NAME}"
 )
 
 Base = declarative_base()
