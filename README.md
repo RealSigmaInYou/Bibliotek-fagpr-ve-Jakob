@@ -114,7 +114,7 @@ JWT_SECRET = DIN_JWT_SECRET
 Løsningen mangler:  
 -	Login validering på alle sider som ikke er innloggingssiden.  
 -	Logg ut funksjon som terminerer token  
--	Oversikt over hvem som er saksbehandler for lån  \
--	Oversikt over lån som snart går ut på dato  \
--	Vise historikk over lån  \
+-	Oversikt over hvem som er saksbehandler for lån  
+-	Oversikt over lån som snart går ut på dato  
+-	Vise historikk over lån  
 
