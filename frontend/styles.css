@@ -47,12 +47,13 @@ h1 {
     margin-top: 1.5rem;
 }
 .card {
+
     background-color: rgb(255, 255, 255);
     border-radius: 1rem;
     padding: 1.25rem;
 }
-.card :hover{
-    background-color: rgb(255, 255, 255);
+.card:hover{
+    background: rgb(238, 238, 238);
 }
 .card a {
     color: #000000;

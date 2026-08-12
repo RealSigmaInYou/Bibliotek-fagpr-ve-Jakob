@@ -189,7 +189,7 @@ export class ReturnItemElement extends LitElement {
     protected render(): HTMLTemplateResult {
         return html`
             <form @submit=${this.handleSubmit}>
-                <label for="item_type">Item type</label>
+                <label for="item_type">Gjennstand type</label>
                 <select id="item_type" name="item_type" @change=${this.handleItemTypeChange}>
                     <option value="book" ?selected=${this.itemType === "book"}>Book</option>
                     <option value="pc" ?selected=${this.itemType === "pc"}>PC</option>
@@ -198,7 +198,7 @@ export class ReturnItemElement extends LitElement {
                 <label for="loan_id">Velg lån</label>
                 ${this.renderLoanSelector()}
 
-                <button type="submit" ?disabled=${!this.activeLoans.length}>Return item</button>
+                <button type="submit" ?disabled=${!this.activeLoans.length}>Returner gjennstand</button>
             </form>
             ${this.statusMessage ? this.renderStatus() : ""}
         `;

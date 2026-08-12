@@ -97,7 +97,7 @@ export class AllPcsElement extends LitElement {
 
     protected render(): HTMLTemplateResult {
         return html`
-            <button @click=${this.handleRefresh}>Refresh PCs</button>
+            <button @click=${this.handleRefresh}>Oppdater enhetsliste</button>
             ${this.statusMessage ? this.renderStatus() : ""}
             ${this.renderPcList()}
         `;
@@ -198,13 +198,13 @@ export class SearchPcsElement extends LitElement {
     protected render(): HTMLTemplateResult {
         return html`
             <form @submit=${this.handleSearch}>
-                <label for="search_serial">Serial number</label>
+                <label for="search_serial">Søk etter serienummer</label>
                 <input type="text" id="search_serial" name="search_serial" />
-
-                <label for="search_device">Device name</label>
+                <p>eller</p>
+                <label for="search_device">Søk etter enhetnavn</label>
                 <input type="text" id="search_device" name="search_device" />
 
-                <button type="submit">Search PCs</button>
+                <button type="submit">Søk etter enhet</button>
             </form>
             ${this.statusMessage
                 ? html`<div class="status">${this.statusMessage}</div>`

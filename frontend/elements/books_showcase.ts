@@ -152,7 +152,7 @@ export class AllBooksElement extends LitElement {
                 <button type="submit">Søk etter bok</button>
             </form>
 
-            <button @click=${this.handleRefresh}>Oppdater resultat</button>
+            <button @click=${this.handleRefresh}>Oppdater bokliste</button>
             ${this.statusMessage ? this.renderStatus() : ""}
             ${this.renderBookList()}
         `;

@@ -87,13 +87,13 @@ export class registerDeviceElement extends LitElement {
     protected render(): HTMLTemplateResult {
         return html`
             <form @submit=${this.handleSubmit}>
-                <label for="serial_number">Serial number</label>
+                <label for="serial_number">Serienummer</label>
                 <input type="text" id="serial_number" name="serial_number" required>
 
-                <label for="device_name">Device name</label>
+                <label for="device_name">Enhetsnavn</label>
                 <input type="text" id="device_name" name="device_name" required>
 
-                <button type="submit">Register device</button>
+                <button type="submit">Registrer enhet</button>
             </form>
         `;
     }
