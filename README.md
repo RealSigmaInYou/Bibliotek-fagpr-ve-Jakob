@@ -108,5 +108,13 @@ For at løsning skal funke må du også lage en fil i prosjektmappen som heter .
 postgres_pw = DITT_POSTGRESQL_PASSORD  \
 db_name = DIN_DATABASE_SITT_NAVN  \
 dev-secret = DIN_KJEMPE_HEMMELIGE_SECRET  \
-JWT_SECRET = DIN_JWT_SECRET  \
+JWT_SECRET = DIN_JWT_SECRET  
+
+# Videreutvikling av løsningen  
+Løsningen mangler:  
+-	Login validering på alle sider som ikke er innloggingssiden.  
+-	Logg ut funksjon som terminerer token  
+-	Oversikt over hvem som er saksbehandler for lån  
+-	Oversikt over lån som snart går ut på dato  
+-	Vise historikk over lån  
 
