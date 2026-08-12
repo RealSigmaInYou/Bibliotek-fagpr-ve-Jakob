@@ -64,3 +64,9 @@ h1 {
     color: #000000;
 
 }
+.warning {
+    color: white;
+    background: rgb(196, 0, 0);
+    border-radius: 1rem;
+    padding: 2rem;
+}
