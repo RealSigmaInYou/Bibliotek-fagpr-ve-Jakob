@@ -102,8 +102,8 @@ export class AllBooksElement extends LitElement {
             if (bookName) params.append("book_name", bookName);
 
             const endpoint = params.toString()
-                ? `http://127.0.0.1:8000/api/books/search?${params.toString()}`
-                : "http://127.0.0.1:8000/api/books";
+                ? `${import.meta.env.VITE_API_URL}/api/books/search?${params.toString()}`
+                : `${import.meta.env.VITE_API_URL}/api/books`;
 
             const response = await fetch(endpoint, {
                 method: "GET",

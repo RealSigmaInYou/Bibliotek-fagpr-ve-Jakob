@@ -58,7 +58,7 @@ export class AllPcsElement extends LitElement {
             const token = localStorage.getItem("token");
             if (!token) throw new Error("Du må logge inn for å få tilgang til denne funksjonen");
 
-            const response = await fetch("http://127.0.0.1:8000/api/pcs", {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/pcs`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -176,7 +176,7 @@ export class SearchPcsElement extends LitElement {
             const token = localStorage.getItem("token");
             if (!token) throw new Error("Du må logge inn for å få tilgang til denne funksjonen");
 
-            const response = await fetch(`http://127.0.0.1:8000/api/pcs/search?${params.toString()}`, {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/pcs/search?${params.toString()}`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",

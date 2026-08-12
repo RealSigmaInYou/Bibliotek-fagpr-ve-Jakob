@@ -14,6 +14,8 @@ app.add_middleware(
         "http://127.0.0.1:5173",
         "http://localhost:5174",
         "http://127.0.0.1:5174",
+        "https://jakobs-bibliotek.enhetyrkesfag.no",
+        "https://jakobs-bibliotek-backend.enhetyrkesfag.no"
     ],
     allow_credentials=True,
     allow_methods=["*"],

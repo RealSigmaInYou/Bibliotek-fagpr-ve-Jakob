@@ -63,7 +63,7 @@ export class registerApprenticeElement extends LitElement {
                 throw new Error("Du må logge inn for å få tilgang til denne funksjonen");
             }
 
-            const response = await fetch("http://127.0.0.1:8000/api/register_apprentice", {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/register_apprentice`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
